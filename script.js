@@ -1,44 +1,27 @@
-const btn = document.querySelector("button");
-
-function sendData(data) {
-  console.log("Sending Contact data");
-
-  const XHR = new XMLHttpRequest();
-
-  const urlEncodedDataPairs = [];
-
-  // Turn the data object into an array of URL-encoded key/value pairs.
-  for (const [name, value] of Object.entries(data)) {
-    urlEncodedDataPairs.push(
-      `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
-    );
-  }
-
-  // Combine the pairs into a single string and replace all %-encoded spaces to
-  // the '+' character; matches the behavior of browser form submissions.
-  const urlEncodedData = urlEncodedDataPairs.join("&").replace(/%20/g, "+");
-
-  // Define what happens on successful data submission
-  XHR.addEventListener("load", (event) => {
-    alert("Yeah! Data sent and response loaded.");
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form submission
+  
+    // Retrieve form values
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementsByName("message")[0].value;
+  
+    // Perform form validation
+    if (name.trim() === "" || email.trim() === "" || subject.trim() === "" || message.trim() === "") {
+      alert("Please fill in all fields");
+      return;
+    }
+  
+    // Perform form submission (replace with your own logic)
+    // Logging form data to the console
+    console.log("Form submitted!");
+    console.log("Name: " + name);
+    console.log("Email: " + email);
+    console.log("Subject: " + subject);
+    console.log("Message: " + message);
+  
+    // Reset form fields
+    document.getElementById("contactForm").reset();
   });
-
-  // Define what happens in case of an error
-  XHR.addEventListener("error", (event) => {
-    alert("Oops! Something went wrong.");
-  });
-
-  // Set up our request
-  XHR.open("POST", "https://example.com/cors.php");
-
-  // Add the required HTTP header for form data POST requests
-  XHR.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-  // Finally, send our data.
-  XHR.send(urlEncodedData);
-}
-
-btn.addEventListener("click", () => {
-  sendData({ test: "ok" });
-});
 
