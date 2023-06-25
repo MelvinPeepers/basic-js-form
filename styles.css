@@ -1,0 +1,19 @@
+body {
+    background-color: #fff;
+    color: #363362;
+}
+
+input {
+    border: solid 1px #363362;
+    border-radius: 3px;
+    padding: 4px 8px;
+}
+
+input:focus {
+    outline: solid 2px #6d6ec5;
+  }
+  
+label {
+    font-size: 18px;
+    font-family: sans-serif;
+}​​
